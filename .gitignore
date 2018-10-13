@@ -1,0 +1,14 @@
+*.m
+*.md
+.idea/
+.spyproject/
+*.png
+*_local.txt
+misc/
+*.pyc
+/__pycache__/
+/utils/
+/logs/0*
+events.*
+*._*
+*.hdf5
