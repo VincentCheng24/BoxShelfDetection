@@ -2,7 +2,6 @@
 *.md
 .idea/
 .spyproject/
-*.png
 *_local.txt
 misc/
 *.pyc
