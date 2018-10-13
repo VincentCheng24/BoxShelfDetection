@@ -1,13 +1,6 @@
-*.m
-*.md
 .idea/
-.spyproject/
-*_local.txt
 misc/
 *.pyc
 /__pycache__/
-/utils/
-/logs/0*
-events.*
 *._*
 *.hdf5
