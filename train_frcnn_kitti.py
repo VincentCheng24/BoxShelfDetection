@@ -32,11 +32,8 @@ def train_kitti():
     cfg.rot_90 = False
     # todo
     cfg.num_rois = 32
-    # resnet:  'resnet50_weights_tf_dim_ordering_tf_kernels.h5'
-    cfg.base_net_weights = os.path.join('./model/', nn.get_weight_path())
 
     # TODO: the only file should to be change for other data to train
-    # cfg.model_path = './model/kitti_frcnn_last.hdf5'  #model trained last time
     cfg.simple_label_file = './dataset/samples_1011.txt'  # label file
 
     # endregion
