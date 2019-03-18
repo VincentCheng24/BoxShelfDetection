@@ -34,7 +34,7 @@ def train_kitti():
     cfg.num_rois = 32
 
     # TODO: the only file should to be change for other data to train
-    cfg.simple_label_file = './dataset/samples_1011.txt'  # label file
+    cfg.simple_label_file = './dataset/samples_V2_1019_two_shelves.txt'  # label file
 
     # endregion
 

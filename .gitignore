@@ -10,4 +10,6 @@ misc/
 *.txt
 *.pdf
 shelf_data/
+*.xml
+*.MOV
 

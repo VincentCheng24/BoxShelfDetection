@@ -14,6 +14,9 @@ import os
 import keras_frcnn.resnet as nn
 from keras_frcnn.visualize import draw_boxes_and_label_on_image_cv2
 
+import digit_ocr
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+# os.environ["CUDA_VISIBLE_DEVICES"]="1"
 
 def format_img_size(img, cfg):
     """ formats the image size based on config """
@@ -129,10 +132,15 @@ def predict_single_image(img_path, model_rpn, model_classifier_only, cfg, class_
         for b in boxes_nms:
             b[0], b[1], b[2], b[3] = get_real_coordinates(ratio, b[0], b[1], b[2], b[3])
             print('{} prob: {}'.format(b[0: 4], b[-1]))
+
+    img_name = os.path.basename(img_path).split('.')[0]
+
+    digit_ocr.digit_ocr(img_name, img, boxes, class_mapping)
+
     img = draw_boxes_and_label_on_image_cv2(img, class_mapping, boxes)
     print('Elapsed time = {}'.format(time.time() - st))
     # cv2.imshow('image', img)
-    result_path = 'D:/Misc/mini/res_img_1011/th08/{}.png'.format(os.path.basename(img_path).split('.')[0])
+    result_path = './images/res_img/0318/{}.png'.format(img_name)
     print('result saved into ', result_path)
     cv2.imwrite(result_path, img)
     # cv2.waitKey(0)
@@ -140,12 +148,15 @@ def predict_single_image(img_path, model_rpn, model_classifier_only, cfg, class_
 
 def predict(args_):
     path = args_.path
-    with open('config.pickle', 'rb') as f_in:
-        cfg = pickle.load(f_in)
+    try:
+        with open('config.pickle', 'rb') as f_in:
+            cfg = pickle.load(f_in)
+    except:
+        pass
     cfg.use_horizontal_flips = False
     cfg.use_vertical_flips = False
     cfg.rot_90 = False
-    cfg.last_model_path = './model/weights_1011.hdf5'
+    cfg.last_model_path = './model/weights_V2_0314.hdf5'
 
     class_mapping = cfg.class_mapping
     if 'bg' not in class_mapping:
@@ -192,7 +203,7 @@ def predict(args_):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', '-p', default='D:/Misc/mini/imges_0975/', help='image path')
+    parser.add_argument('--path', '-p', default='./images/train_set', help='image path')
     return parser.parse_args()
 
 
